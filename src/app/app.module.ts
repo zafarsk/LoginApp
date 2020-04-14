@@ -3,38 +3,45 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule }   from '@angular/forms';
 import { AppComponent } from './app.component';
-
+import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // RECOMMENDED
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+
 
 import { NavComponent } from './nav/nav.component';
 import { AuthService } from './_services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
+import { MemberListComponent } from './member-list/member-list.component';
+import { MessagesComponent } from './messages/messages.component';
+import { ListsComponent } from './lists/lists.component';
+import { appRoutes } from './routes';
+
 
 @NgModule({
    declarations: [
       AppComponent,
       NavComponent,
       HomeComponent,
-      RegisterComponent
+      RegisterComponent,
+      MemberListComponent,
+      MessagesComponent,
+      ListsComponent
    ],
    imports: [
-     
       BrowserModule,
       BrowserAnimationsModule,
       HttpClientModule,
       FormsModule,
-      
-      BsDropdownModule.forRoot()
+      BsDropdownModule.forRoot(),
+      RouterModule.forRoot(appRoutes)
    ],
    providers: [
       AuthService,
-      ErrorInterceptorProvider,
-      
+      ErrorInterceptorProvider
    ],
    bootstrap: [
       AppComponent
