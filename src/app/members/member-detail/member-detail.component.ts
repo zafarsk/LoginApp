@@ -73,8 +73,7 @@ export class MemberDetailComponent implements OnInit {
         this.slideIndex = slides.length;
       }
       for (i = 0; i < slides.length; i++) {
-        console.log(slides[i]);
-       // slides[i].style.display = "none";
+       slides[i].setAttribute("style","display:none");
       }
       for (i = 0; i < dots.length; i++) {
         dots[i].className = dots[i].className.replace(" active", "");
