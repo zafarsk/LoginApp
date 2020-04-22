@@ -3,7 +3,6 @@ import { User } from 'src/app/_models/user';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
-import { NgxGalleryOptions, NgxGalleryImage } from 'ngx-gallery';
 
 @Component({
   selector: 'app-member-detail',
@@ -13,17 +12,31 @@ import { NgxGalleryOptions, NgxGalleryImage } from 'ngx-gallery';
 export class MemberDetailComponent implements OnInit {
 
   user: User;
-  galleryOptions: NgxGalleryOptions[];
-  galleryImages: NgxGalleryImage[];
-
+  slideIndex = 1;
   constructor(private userService: UserService, private alertify: AlertifyService,
     private activateRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    //this.loadUser();
     this.activateRoute.data.subscribe(data => {
       this.user = data['user'];
-    });
+    });  
+    //this.showSlides(this.slideIndex);
+  }
+
+  getPhotos()
+  {
+    const photos =[];
+    for(const photo of this.user.photos){
+      photos.push({
+        small: photo.url,
+        medium: photo.url,
+        big: photo.url,
+        description: photo.description
+
+      });
+    }
+
+    return photos;
   }
 
   loadUser() {
@@ -35,6 +48,50 @@ export class MemberDetailComponent implements OnInit {
     });
   }
 
+   
+    
+
+    // Next/previous controls
+     plusSlides(n) {
+      this.showSlides((this.slideIndex += n));
+    }
+
+    // Thumbnail image controls
+     currentSlide(n) {
+      this.showSlides((this.slideIndex = n));
+    }
+
+     showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("demo");
+      var captionText = document.getElementById("caption");
+      if (n > slides.length) {
+        this.slideIndex = 1;
+      }
+      if (n < 1) {
+        this.slideIndex = slides.length;
+      }
+      for (i = 0; i < slides.length; i++) {
+        console.log(slides[i]);
+       // slides[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+
+      if(slides.length > 0){
+        slides[this.slideIndex - 1].setAttribute("style","display:block");
+      }
+
+     if(dots.length > 0)
+     {
+      dots[this.slideIndex - 1].className += " active";
+      captionText.innerHTML = dots[this.slideIndex - 1].getAttribute("alt");
+     }
+      //
+      //
+    }
 
 
 }

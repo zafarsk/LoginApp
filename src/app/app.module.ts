@@ -10,7 +10,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // RECOMMENDED
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import {TabsModule } from 'ngx-bootstrap/tabs'
-import { NgxGalleryModule } from 'ngx-gallery';
 
 
 
@@ -28,7 +27,7 @@ import {MemberDetailComponent } from './members/member-detail/member-detail.comp
 import { AlertifyService } from './_services/alertify.service';
 import { AuthGuard } from './_gaurds/auth.guard';
 import { UserService } from './_services/user.service';
-import { from } from 'rxjs';
+//import { from } from 'rxjs';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
 
@@ -39,7 +38,7 @@ export function tokenGetter() {
 }
 
 @NgModule({
-   declarations: [
+   declarations: [ 
       AppComponent,
       NavComponent,
       HomeComponent,
@@ -56,16 +55,15 @@ export function tokenGetter() {
       HttpClientModule,
       FormsModule,
       BsDropdownModule.forRoot(),
-      TabsModule.forRoot(),
+      TabsModule.forRoot(),          
       RouterModule.forRoot(appRoutes),
-      NgxGalleryModule,
       JwtModule.forRoot({
          config: {
             tokenGetter: tokenGetter,
             whitelistedDomains: ['localhost:5001'],
             blacklistedRoutes: ['http://localhost:5001/auth/login']
          }
-      })
+      }),
    ],
    providers: [
       AuthService,
