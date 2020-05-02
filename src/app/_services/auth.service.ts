@@ -31,10 +31,14 @@ login(model: any){
     map((response: any) => {
       const user = response;
       if(user){
+        if(!user.user.photoUrl)
+        {
+          user.user.photoUrl ="../../../assets/favicon.ico";
+        }
         localStorage.setItem('token',user.token);
         localStorage.setItem('user',JSON.stringify(user.user));
         this.decodedToken = this.jwtHelper.decodeToken(user.token);
-        this.currentUser = user.user;
+        this.currentUser = user.user;        
         this.changeMemberPhoto(this.currentUser.photoUrl);
         
       }
@@ -42,8 +46,8 @@ login(model: any){
   );
 }
 
-register(model: any){
-  return this.http.post(this.baseUrl + "register",model);
+register(user: User){
+  return this.http.post(this.baseUrl + "register",user);
 }
 
 loggedIn(){

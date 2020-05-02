@@ -5,7 +5,7 @@
         <div class="card-body">
           <img
             class="card-img-top img-thumbnail"
-            src="{{ user?.photoUrl }}"
+            src="{{ user?.photoUrl || '../../../assets/favicon.ico' }}"
             alt="{{ user?.knownAs }}"
           />
           <div>
@@ -49,8 +49,11 @@
           </tab>
 
           <tab heading="Photos">
+            <div class="container mt-4" *ngIf="!user.photos.length">
+              No photos available for the user
+            </div>
             <!-- Container for the image gallery -->
-            <div class="container mt-4" >
+            <div class="container mt-4" *ngIf="user.photos.length">
               <!-- Full-width images with number text -->
               <div
                 *ngFor="let photo of user.photos; index as indexOfelement"
