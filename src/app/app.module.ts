@@ -10,7 +10,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // RECOMMENDED
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
-import {TabsModule } from 'ngx-bootstrap/tabs'
+import {TabsModule } from 'ngx-bootstrap/tabs';
+import {PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons'
 
 
 
@@ -36,6 +38,7 @@ import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { PreventUnsavedChanges } from './_gaurds/prevent.unsaved.changes.gaurd';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { from } from 'rxjs';
 
 
 
@@ -56,7 +59,7 @@ export function tokenGetter() {
       MemberCardComponent,
       MemberDetailComponent,
       MemberEditComponent,
-      PhotoEditorComponent
+      PhotoEditorComponent,
    ],
    imports: [
       BrowserModule,
@@ -66,7 +69,9 @@ export function tokenGetter() {
       ReactiveFormsModule,
       BsDropdownModule.forRoot(),
       BsDatepickerModule.forRoot(),
-      TabsModule.forRoot(),          
+      TabsModule.forRoot(), 
+      PaginationModule.forRoot(),
+      ButtonsModule.forRoot(),        
       RouterModule.forRoot(appRoutes),
       FileUploadModule,
       JwtModule.forRoot({
