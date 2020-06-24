@@ -39,6 +39,7 @@ import { PreventUnsavedChanges } from './_gaurds/prevent.unsaved.changes.gaurd';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { from } from 'rxjs';
+import { ListsResolver } from './_resolvers/list.resolver';
 
 
 
@@ -91,7 +92,8 @@ export function tokenGetter() {
       MemberDetailResolver,
       MemberListResolver,
       MemberEditResolver,
-      PreventUnsavedChanges
+      PreventUnsavedChanges,
+      ListsResolver
    ],
    bootstrap: [
       AppComponent
