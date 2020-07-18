@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from 'src/app/_models/user';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
+import { TabsetComponent } from 'ngx-bootstrap/tabs';
 
 @Component({
   selector: 'app-member-detail',
@@ -11,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MemberDetailComponent implements OnInit {
 
+  @ViewChild("memberTabs",{static:true}) memberTabs : TabsetComponent
   user: User;
   slideIndex = 1;
   constructor(private userService: UserService, private alertify: AlertifyService,
@@ -21,6 +23,10 @@ export class MemberDetailComponent implements OnInit {
       this.user = data['user'];
     });  
     //this.showSlides(this.slideIndex);
+    this.activateRoute.queryParams.subscribe(data =>{
+      const selectedTab = data["tab"];
+      this.selectTab(selectedTab > 0? selectedTab : 0);
+    })
   }
 
   getPhotos()
@@ -90,6 +96,10 @@ export class MemberDetailComponent implements OnInit {
      }
       //
       //
+    }
+
+    selectTab(tabId: number){
+      this.memberTabs.tabs[tabId].active = true;
     }
 
 
